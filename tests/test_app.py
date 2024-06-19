@@ -58,7 +58,11 @@ class FlaskAppTest(TestCase):
     def test_index_get(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'prediction', response.data)
+        # Verificar que la estructura básica de la página está presente
+        self.assertIn(b'Clasificaci\xc3\xb3n de Im\xc3\xa1genes', response.data)
+        self.assertIn(b'<form method="post" enctype="multipart/form-data" id="upload-form">', response.data)
+        self.assertIn(b'<input type="file" class="form-control-file" id="file" name="file">', response.data)
+        self.assertIn(b'<button type="submit" class="btn btn-primary" id="submit-btn">Enviar</button>', response.data)
 
 if __name__ == '__main__':
     unittest.main()
