@@ -8,7 +8,7 @@ from tensorflow.keras.models import load_model
 from unittest.mock import patch, MagicMock
 
 # Supongamos que el código Flask está en un archivo llamado app.py
-import app as flask_app
+from app import app
 
 class FlaskAppTest(TestCase):
 
