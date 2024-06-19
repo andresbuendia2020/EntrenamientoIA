@@ -13,22 +13,22 @@ from app import app
 class FlaskAppTest(TestCase):
 
     def create_app(self):
-        flask_app.app.config['TESTING'] = True
-        flask_app.app.config['UPLOAD_FOLDER'] = 'test/uploads/'
-        return flask_app.app
+        app.config['TESTING'] = True
+        app.config['UPLOAD_FOLDER'] = 'test/uploads/'
+        return app
 
     def setUp(self):
         # Crear la carpeta de pruebas si no existe
-        if not os.path.exists(flask_app.app.config['UPLOAD_FOLDER']):
-            os.makedirs(flask_app.app.config['UPLOAD_FOLDER'])
+        if not os.path.exists(self.app.config['UPLOAD_FOLDER']):
+            os.makedirs(self.app.config['UPLOAD_FOLDER'])
 
     def tearDown(self):
         # Eliminar la carpeta de pruebas y su contenido
-        if os.path.exists(flask_app.app.config['UPLOAD_FOLDER']):
-            for file in os.listdir(flask_app.app.config['UPLOAD_FOLDER']):
-                file_path = os.path.join(flask_app.app.config['UPLOAD_FOLDER'], file)
+        if os.path.exists(self.app.config['UPLOAD_FOLDER']):
+            for file in os.listdir(self.app.config['UPLOAD_FOLDER']):
+                file_path = os.path.join(self.app.config['UPLOAD_FOLDER'], file)
                 os.remove(file_path)
-            os.rmdir(flask_app.app.config['UPLOAD_FOLDER'])
+            os.rmdir(self.app.config['UPLOAD_FOLDER'])
 
     @patch('app.load_model')
     @patch('app.cv2.imread')
